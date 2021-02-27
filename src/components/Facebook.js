@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 import FacebookLogin from 'react-facebook-login';
 
-require('dotenv').config()
+import Header from './Header';
+import '../App.css';
+import logo from '../logo.svg';
+
 
 export class Facebook extends Component {
 
@@ -17,6 +20,7 @@ export class Facebook extends Component {
     componentClicked = () => console.log('clicked');
 
     responseFacebook = (response) => {
+        console.log(response)
         this.setState({
             isLoggedIn: true,
             userID: response.userID,
@@ -33,8 +37,6 @@ export class Facebook extends Component {
             fbContent = (
                 <div style={{
                     width: '400px',
-                    margin: 'auto',
-                    // background: '#f4f4f4',
                     padding: '20px'
                 }}>
                     <img src={this.state.picture} alt={this.state.name} />
@@ -55,7 +57,13 @@ export class Facebook extends Component {
 
         return (
             <div>
-                {fbContent}
+                <div className="App">
+                    <header className="App-header">
+                        <img src={logo} className="App-logo" alt="logo" />
+                        {this.state.isLoggedIn ? '' : <Header />}
+                        {fbContent}
+                    </header>
+                </div>
             </div>
         )
     }
